@@ -1,0 +1,70 @@
+.bg {
+  /* The image used */
+  background-color: rgb(255, 255, 255);
+
+  /* Full height */
+  height: 100%;
+
+  /* Center and scale the image nicely */
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-attachment: fixed;
+}
+
+.wrapper{
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 100%;
+  padding: 0 20px;
+
+}
+
+.section{
+  max-width: 90%;
+  margin: 0 auto;
+  background-color: rgba(255, 255, 255, 0.672);
+  padding: 2%;
+  border-radius:5px;
+  display: flex;
+  box-shadow: 0 0 10px;
+  max-height: fit-content;
+}
+
+.section-right{
+  width: 80%;
+  float: left;
+  height: auto;
+  background-color: rgba(255, 255, 255, 0.761);
+  padding-bottom: 2%;
+}
+.section-left{
+  width: 20%;
+  float: left;
+  height: auto;
+}
+
+h2,h5{
+  color: rgb(55, 98, 136);
+}
+
+.mat-tab-label {
+  min-width: 25px !important;
+  padding: 5px;
+  background-color: transparent;
+  color: rgb(116, 113, 113);
+  font-weight: 700;
+}
+
+/* Styles for the active tab label */
+.mat-tab-label.mat-tab-label-active {
+  min-width: 25px !important;
+  padding: 5px;
+  background-color: transparent;
+  color: rgb(0, 70, 0);
+  font-weight: 700;
+}
+.mat-ink-bar {
+  background-color: gray;
+}

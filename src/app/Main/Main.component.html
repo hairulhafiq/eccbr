@@ -1,0 +1,47 @@
+<div class="bg" style="height: calc(100vh);">
+  <div class="wrapper">
+    <div class="section">
+      <div class="section-left">
+        <form class="input-fields">
+          <img style="align-items: center; justify-content: center;" height="80%" width="80%"
+            src='../../assets/Qualitas_logo.png'>
+
+          <h2 style="position: center; font-weight: bold;">E-Cash Collection </h2>
+          <mat-form-field>
+            <input matInput placeholder="Date" value="{{TodayDate | date}}">
+          </mat-form-field>
+          <mat-form-field>
+            <input matInput type="initial" id="initial" placeholder="Cash In Safe">
+          </mat-form-field>
+          <mat-form-field>
+            <input matInput type="initial" id="initial" placeholder="Locum Cash">
+          </mat-form-field>
+          <mat-form-field>
+            <input matInput type="id" id="id" name="id" placeholder="Petty Cash">
+          </mat-form-field>
+        </form>
+      </div>
+      <div class="section-right">
+        <mat-tab-group style="margin-left: 3%; margin-right: 3%;">
+          <mat-tab label="Daily Sales">
+            <mat-tab-group [selectedIndex]="selected.value" (selectedIndexChange)="selected.setValue($event)">
+              <mat-tab *ngFor="let tab of tabs; let index = index" [label]="tab">
+                <div style="padding-top: 1%;">
+                  <label for="date"> Date: {{TodayDate | date}} </label>
+                  <!-- <label style="margin-left: 3%;" for=" healed">Has the wound healed?
+                    <mat-slide-toggle ngDefaultControl (change)="onChangeWoundHeal($event)">
+                    </mat-slide-toggle>
+                  </label> -->
+                </div>
+              </mat-tab>
+            </mat-tab-group>
+          </mat-tab>
+          <mat-tab label="Reimbursment">
+          </mat-tab>
+          <mat-tab label="Requisition">
+          </mat-tab>
+        </mat-tab-group>
+      </div>
+    </div>
+  </div>
+</div>
