@@ -12,9 +12,9 @@ import { FormGroup, FormControl } from '@angular/forms';
 })
 export class MainComponent implements OnInit {
   TodayDate = Date.now();
-  NoOfWeek = 2;
+  NoOfWeek = 1;
   stopTab: number = 0;
-  tabs = ['Week 2'];
+  tabs = ['Shift 1'];
   selected = new FormControl(0);
 
   constructor() { }
