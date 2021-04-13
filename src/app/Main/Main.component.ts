@@ -1,6 +1,6 @@
 import { Component, OnInit, ViewEncapsulation } from '@angular/core';
 import { DatePipe } from '@angular/common';
-import { FormGroup, FormControl } from '@angular/forms';
+import { FormControl } from '@angular/forms';
 
 @Component({
   selector: 'app-Main',
@@ -12,31 +12,28 @@ import { FormGroup, FormControl } from '@angular/forms';
 })
 export class MainComponent implements OnInit {
   TodayDate = Date.now();
-  NoOfWeek = 1;
-  stopTab: number = 0;
   tabs = ['Shift 1'];
   selected = new FormControl(0);
+  stopTab: number = 0;
+  NoOfShift = 1;
 
   constructor() { }
 
-  onChangeWoundHeal() {
+  onClosing($event: any) {
     this.stopTab = 1;
   }
 
-  // addTab() {
+  addTab($event: any) {
 
+    if (this.stopTab == 1) {
+      ($event.target as HTMLButtonElement).disabled = true;
+    }
+    else if (this.stopTab == 0) {
+      this.NoOfShift = this.NoOfShift + 1;
+      this.tabs.push('Shift ' + this.NoOfShift);
+    }
 
-  //   if (this.stopTab == 1) {
-  //     ($event.target as HTMLButtonElement).disabled = true;
-  //     confirm("Patient is fully healed.");
-  //   }
-  //   else if (this.stopTab == 0) {
-  //     this.NoOfWeek = this.NoOfWeek + 2;
-  //     this.tabs.push('Week ' + this.NoOfWeek);
-  //     confirm("Patient next Appointment will be in 2 weeks.");
-  //   }
-
-  // }
+  }
 
   ngOnInit() {
   }

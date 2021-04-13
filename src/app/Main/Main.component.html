@@ -8,7 +8,7 @@
 
           <h2 style="position: center; font-weight: bold;">E-Cash Collection </h2>
           <mat-form-field>
-            <input matInput placeholder="Date" value="{{TodayDate | date}}">
+            <input matInput placeholder="Date" value="{{TodayDate | date}}" [disabled]="true">
           </mat-form-field>
           <mat-form-field>
             <input matInput type="initial" id="initial" placeholder="Cash In Safe">
@@ -25,14 +25,35 @@
         <mat-tab-group style="margin-left: 3%; margin-right: 3%;">
           <mat-tab label="Daily Sales">
             <mat-tab-group [selectedIndex]="selected.value" (selectedIndexChange)="selected.setValue($event)">
-              <mat-tab *ngFor="let tab of tabs; let index = index" [label]="tab">
-                <div style="padding-top: 1%;">
-                  <label for="date"> Date: {{TodayDate | date}} </label>
-                  <!-- <label style="margin-left: 3%;" for=" healed">Has the wound healed?
-                    <mat-slide-toggle ngDefaultControl (change)="onChangeWoundHeal($event)">
+              <mat-tab style="padding-top: 2%;" *ngFor="let tab of tabs; let index = index" [label]="tab">
+                <form style="padding-top:2%; padding-left: 1%;">
+                  <mat-form-field>
+                    <input matInput placeholder="Time" value="{{TodayDate | date:'medium'}}" [disabled]="true">
+                  </mat-form-field>
+                  <mat-label style="margin-left: 3%;" for=" healed">Closing?
+                    <mat-slide-toggle ngDefaultControl (change)="onClosing($event)">
                     </mat-slide-toggle>
-                  </label> -->
-                </div>
+                  </mat-label>
+                  <br>
+                  <mat-form-field>
+                    <input matInput type="id" id="id" name="id" placeholder="Opening Balance">
+                  </mat-form-field><br>
+                  <mat-form-field>
+                    <input matInput type="id" id="id" name="id" placeholder="Total Cash Sales">
+                  </mat-form-field>
+                  <mat-form-field style="margin-left: 3%;">
+                    <input matInput type="id" id="id" name="id" placeholder="Total Cash Invoiced">
+                  </mat-form-field>
+                  <mat-form-field style="margin-left: 3%;">
+                    <input matInput type="id" id="id" name="id" placeholder="Canceled Cash Invoiced">
+                  </mat-form-field><br>
+                  <mat-form-field>
+                    <input matInput type="id" id="id" name="id" placeholder="Total Cash Received">
+                  </mat-form-field><br>
+                </form>
+                <button mat-raised-button [disabled]="false" class="button" (click)="addTab($event)">
+                  Submit
+                </button>
               </mat-tab>
             </mat-tab-group>
           </mat-tab>

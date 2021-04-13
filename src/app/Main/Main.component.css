@@ -62,9 +62,47 @@ h2,h5{
   min-width: 25px !important;
   padding: 5px;
   background-color: transparent;
-  color: rgb(0, 70, 0);
+  color: rgb(6, 114, 6);
   font-weight: 700;
 }
 .mat-ink-bar {
   background-color: gray;
+}
+
+.button {
+  border-radius: 4px;
+  background-color: rgb(25, 144, 199);
+  border: none;
+  color: #ffffff;
+  text-align: center;
+  font-size: 18px;
+  transition: all 0.5s;
+  cursor: pointer;
+  margin: 5px;
+  position: relative;
+  left: 330px;
+  width: 100px;
+}
+
+.button:disabled {
+  border-radius: 4px;
+  background-color: #fcfcfc;
+  border: none;
+  color: #ffffff;
+}
+
+.mat-slide-toggle.mat-checked:not(.mat-disabled) .mat-slide-toggle-bar {
+  background-color: #1c83b3;
+}
+
+.mat-slide-toggle.mat-checked:not(.mat-disabled) .mat-slide-toggle-thumb {
+  background-color: #1c83b3;
+}
+
+.mat-accent .mat-slider-track-fill {
+  background: #1c83b3;
+}
+
+.mat-accent .mat-slider-thumb {
+  background: #1c83b3;
 }
