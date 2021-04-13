@@ -26,13 +26,7 @@
           <mat-tab label="Daily Sales">
             <mat-tab-group [selectedIndex]="selected.value" (selectedIndexChange)="selected.setValue($event)">
               <mat-tab *ngFor="let tab of tabs; let index = index" [label]="tab">
-                <div style="padding-top: 1%;">
-                  <label for="date"> Date: {{TodayDate | date}} </label>
-                  <!-- <label style="margin-left: 3%;" for=" healed">Has the wound healed?
-                    <mat-slide-toggle ngDefaultControl (change)="onChangeWoundHeal($event)">
-                    </mat-slide-toggle>
-                  </label> -->
-                </div>
+
               </mat-tab>
             </mat-tab-group>
           </mat-tab>
