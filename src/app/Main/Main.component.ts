@@ -12,6 +12,8 @@ import { FormControl } from '@angular/forms';
 })
 export class MainComponent implements OnInit {
   TodayDate = Date.now();
+  tabs = ['Shift 1'];
+  selected = new FormControl(0);
 
   constructor() { }
 
