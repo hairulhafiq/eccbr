@@ -17,13 +17,17 @@ import { MatDatepickerModule } from '@angular/material/datepicker';
 import { MatIconModule } from '@angular/material/icon';
 import { MainComponent } from './Main/Main.component';
 import { FooterComponent } from './footer/footer.component';
+import { MatDialogModule } from '@angular/material/dialog';
+import { Bank_in_dialogComponent } from './bank_in_dialog/bank_in_dialog.component';
 
 @NgModule({
-  declarations: [	
+  declarations: [
     AppComponent,
-      MainComponent,
-      FooterComponent
-   ],
+    MainComponent,
+    FooterComponent,
+    Bank_in_dialogComponent
+  ],
+  entryComponents: [Bank_in_dialogComponent],
   imports: [
     BrowserModule,
     AppRoutingModule,
@@ -38,9 +42,10 @@ import { FooterComponent } from './footer/footer.component';
     MatSlideToggleModule,
     MatTabsModule,
     MatDatepickerModule,
-    MatIconModule
+    MatIconModule,
+    MatDialogModule
   ],
   providers: [],
-  bootstrap: [AppComponent]
+  bootstrap: [AppComponent],
 })
 export class AppModule { }
