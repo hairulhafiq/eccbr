@@ -1,8 +1,13 @@
 <h2 mat-dialog-title>Bank In Details</h2>
 <mat-dialog-content>
-  <p>Please fill up following details</p>
+  <p>Please fill up following details</p> <br>
+  <mat-form-field>
+    <input matInput type="initial" id="initial" placeholder="Bank In Amount">
+  </mat-form-field><br>
+  <label style="margin-right: 3%;" for="file">Choose File</label>
+  <input type="file" id="file">
 </mat-dialog-content>
 <mat-dialog-actions>
-  <button mat-button>Cancel</button>
+  <button mat-button (click)="onNoClick()">Cancel</button>
   <button mat-button>Submit</button>
 </mat-dialog-actions>

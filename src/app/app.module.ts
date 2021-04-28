@@ -19,14 +19,25 @@ import { MainComponent } from './Main/Main.component';
 import { FooterComponent } from './footer/footer.component';
 import { MatDialogModule } from '@angular/material/dialog';
 import { Bank_in_dialogComponent } from './bank_in_dialog/bank_in_dialog.component';
+import { MatPaginatorModule } from '@angular/material/paginator';
+import { MatTableModule } from '@angular/material/table';
+import { Locum_expensesComponent } from './locum_expenses/locum_expenses.component';
+import { Daily_salesComponent } from './daily_sales/daily_sales.component';
+import { ReactiveFormsModule, FormBuilder, FormGroup, Validator } from '@angular/forms';
+import { Common_expensesComponent } from './common_expenses/common_expenses.component';
+import { Reimbursement_requisitionComponent } from './reimbursement_requisition/reimbursement_requisition.component';
 
 @NgModule({
-  declarations: [
+  declarations: [		
     AppComponent,
     MainComponent,
     FooterComponent,
-    Bank_in_dialogComponent
-  ],
+    Bank_in_dialogComponent,
+    Locum_expensesComponent,
+    Daily_salesComponent,
+      Common_expensesComponent,
+      Reimbursement_requisitionComponent
+   ],
   entryComponents: [Bank_in_dialogComponent],
   imports: [
     BrowserModule,
@@ -43,7 +54,10 @@ import { Bank_in_dialogComponent } from './bank_in_dialog/bank_in_dialog.compone
     MatTabsModule,
     MatDatepickerModule,
     MatIconModule,
-    MatDialogModule
+    MatDialogModule,
+    MatPaginatorModule,
+    MatTableModule,
+    ReactiveFormsModule
   ],
   providers: [],
   bootstrap: [AppComponent],

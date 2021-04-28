@@ -5,79 +5,60 @@
         <form>
           <img style="transform: translateX(11%);" height="70%" width="70%" src='../../assets/Qualitas_logo.png'>
 
-          <h2 style="position: center; font-weight: bold;">E-Cash Collection </h2>
+          <h2 style="position: center; font-weight: bold;">E-Cash Collection Book Record</h2>
           <mat-form-field>
             <input matInput placeholder="Date" value="{{TodayDate | date}}" [disabled]="true">
-          </mat-form-field>
+          </mat-form-field><br>
 
           <mat-form-field>
             <input matInput type="initial" id="initial" placeholder="Cash In Safe">
           </mat-form-field>
-          <button style="margin-left: 4%;" mat-raised-button (click)="onCreate()">
-            Bank in
-          </button>
-          <mat-form-field>
-            <input matInput type="initial" id="initial" placeholder="Locum Cash">
-          </mat-form-field>
-          <mat-form-field>
-            <input matInput type="id" id="id" name="id" placeholder="Petty Cash">
-          </mat-form-field>
-          <button style="margin-left: 4%; margin-right: 1%;" mat-raised-button [disabled]="false"
-            (click)='matgroup.selectedIndex = 1'>
-            Reimburse
-          </button>
         </form>
+        <button style="margin-left: 4%;" mat-raised-button class="button_bankin" (click)="onCreate()">
+          Bank in
+        </button>
+        <div style="border-style:groove; border-radius: 5%; padding-top: 3%; padding-left: 2%; width: 95%;">
+          <form>
+            <mat-form-field>
+              <input matInput type="id" id="tillmoney" name="tillmoney" placeholder="Total Till Money" value="RM 50"
+                [disabled]="true">
+            </mat-form-field>
+            <mat-form-field>
+              <input matInput type="initial" id="initial" placeholder="Locum Cash">
+            </mat-form-field>
+            <mat-form-field>
+              <input matInput type="id" id="id" name="id" placeholder="Petty Cash">
+            </mat-form-field>
+          </form>
+        </div>
+        <button style="margin-left: 4%; width: 27%; height: max-content;" mat-raised-button class="button_bankin"
+          (click)='matgroup.selectedIndex = 1'>
+          Record
+        </button>
       </div>
       <div class="section-right">
-        <mat-tab-group style="margin-left: 3%; margin-right: 3%;" #matgroup>
-          <mat-tab label="Daily Sales">
-            <mat-tab-group [selectedIndex]="selected.value" (selectedIndexChange)="selected.setValue($event)">
-              <mat-tab style="padding-top: 2%; width: 10%;" *ngFor="let tab of tabs; let index = index" [label]="tab">
-                <form style="padding-top:2%; padding-left: 1%;">
-                  <mat-form-field>
-                    <input matInput placeholder="Time" value="{{TodayDate | date:'medium'}}" [disabled]="true">
-                  </mat-form-field>
-                  <mat-label style="margin-left: 3%;" for=" healed">Closing?
-                    <mat-slide-toggle ngDefaultControl (change)="onClosing($event)">
-                    </mat-slide-toggle>
-                  </mat-label>
-                  <br>
-                  <mat-form-field>
-                    <input matInput type="id" id="opening" name="opening" placeholder="Opening Balance">
-                  </mat-form-field>
-                  <mat-form-field style="margin-left: 3%;">
-                    <input matInput type="id" id="visit" name="visit" placeholder="Cash Sales Visit">
-                  </mat-form-field><br>
-                  <mat-form-field>
-                    <input matInput type="id" id="total" name="total" placeholder="Total Cash Sales">
-                  </mat-form-field>
-                  <mat-form-field style="margin-left: 3%;">
-                    <input matInput type="id" id="invoiced" name="invoiced" placeholder="Total Cash Invoiced">
-                  </mat-form-field>
-                  <mat-form-field style="margin-left: 3%;">
-                    <input matInput type="id" id="cancel" name="cancel" placeholder="Canceled Cash Invoiced">
-                  </mat-form-field><br>
-                  <mat-form-field>
-                    <input matInput type="id" id="received" name="received" placeholder="Total Cash Received">
-                  </mat-form-field><br>
-                </form>
-                <button mat-raised-button [disabled]="false" class="button" (click)="addTab($event)">
-                  Submit
-                </button>
-              </mat-tab>
-            </mat-tab-group>
+        <mat-tab-group style="margin-left: 2%; margin-right: 3%;" #matgroup>
+          <mat-tab label="CASH IN TRANSIT">
+            <app-daily_sales></app-daily_sales>
           </mat-tab>
-          <mat-tab label="Locum Expenses / Common Expenses">
-            <div style="width: max-content;">
-              <div class="locum">
-
-              </div>
-              <div class="petty">
-
-              </div>
+          <mat-tab label="RECORD EXPENSES">
+            <div style="width: 100%; padding-top: 1%;">
+              <mat-tab-group style="margin-left: 1%; margin-right: 3%;">
+                <mat-tab label="Locum Expenses">
+                  <div class="card" style="padding-top: 2%;">
+                    <app-locum_expenses></app-locum_expenses>
+                  </div>
+                </mat-tab>
+                <mat-tab label="Common Expenses">
+                  <div style="padding-top: 2%;">
+                    <app-common_expenses></app-common_expenses>
+                  </div>
+                </mat-tab>
+              </mat-tab-group>
             </div>
           </mat-tab>
-          <mat-tab label="Requisition">
+          <mat-tab label="REIMBURSEMENT & REQUISITION">
+            <app-reimbursement_requisition></app-reimbursement_requisition>
           </mat-tab>
         </mat-tab-group>
       </div>
