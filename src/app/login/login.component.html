@@ -1,0 +1,26 @@
+<div fxLayoutAlign="center center" fxFlexFill class="main-div">
+  <mat-card fxFlex="25">
+    <mat-toolbar color="primary">Login Page</mat-toolbar>
+    <form style="padding-top: 4%;" fxLayoutAlign="stretch" fxLayout="column" class="login-form">
+      <mat-form-field>
+        <input [formControl]="usernameControl" matInput #username (change)="didModify(username.value)"
+          placeholder="Username" required>
+        <mat-error *ngIf="usernameControl.hasError('required')">Please enter Username</mat-error>
+      </mat-form-field>
+      <mat-form-field>
+        <input [formControl]="passControl" matInput #userpassword type="password" placeholder="Password" required>
+        <mat-error *ngIf="passControl.hasError('required')">Please enter Password</mat-error>
+      </mat-form-field>
+      <mat-form-field>
+        <mat-select [formControl]="selectControl" placeholder="Clinic Name" [(value)]="selectedItem" required>
+          <mat-option *ngFor="let clinics of clinic" value={{clinics.ECBCLU_CLINICCODE}}>
+            {{clinics.CLINICNAME}}
+          </mat-option>
+        </mat-select>
+        <mat-error *ngIf="selectControl.hasError('required')">Please choose a clinic</mat-error>
+      </mat-form-field>
+      <button mat-raised-button (click)="OnLogin(username.value,userpassword.value,selectedItem)" type="submit"
+        color="primary">Login</button>
+    </form>
+  </mat-card>
+</div>

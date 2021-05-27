@@ -1,0 +1,29 @@
+<div style="align-items: center;">
+
+  <h1>Locum Expenses</h1>
+  <div>
+    <!-- <input type="text" class="form-control" [(ngModel)]="LocumExpenses" placeholder="Doctor Name"> -->
+    <form>
+      <mat-form-field style="margin-left: 3%; width: 32%">
+        <input matInput type="id" id="docname" class="form-control" name="docname" placeholder="Doctor Name" value="">
+      </mat-form-field>
+      <mat-form-field style="margin-left: 3%;">
+        <input matInput type="id" id="ic" name="ic" class="form-control" placeholder="Ic Number" value="">
+      </mat-form-field>
+      <mat-form-field style="margin-left: 3%;">
+        <input matInput type="number" id="payment" class="form-control" name="payment" placeholder="Total Payment"
+          value="">
+      </mat-form-field><br>
+      <mat-form-field style="margin-left: 3%; width: 80%;">
+        <input matInput type="id" id="payment" class="form-control" name="remark" placeholder="Remark" value="">
+      </mat-form-field>
+
+    </form>
+
+  </div>
+
+</div>
+<button mat-button (click)="onNoClick()">Close</button>
+<button (click)="addlocum()" class="btn btn-primary float-right m-2">
+  Save
+</button>

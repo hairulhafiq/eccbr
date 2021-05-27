@@ -1,39 +1,60 @@
-<form [formGroup]="locumexpenses">
-  <mat-form-field style="margin-left: 3%; width: 32%">
-    <input matInput type="id" id="docname" formControlName="docname" name="docname" placeholder="Doctor Name" value="">
-  </mat-form-field>
-  <mat-form-field style="margin-left: 3%;">
-    <input matInput type="id" id="ic" name="ic" formControlName="icnumber" placeholder="Ic Number" value="">
-  </mat-form-field>
-  <mat-form-field style="margin-left: 3%;">
-    <input matInput type="number" id="payment" formControlName="totalpayment" name="payment" placeholder="Total Payment"
-      value="">
-  </mat-form-field><br>
-  <mat-form-field style="margin-left: 3%; width: 80%;">
-    <input matInput type="id" id="payment" formControlName="remark" name="remark" placeholder="Remark" value="">
-  </mat-form-field>
-  <button mat-raised-button style="margin-left: 5%;" (click)="addLocum()">
-    Save
-  </button>
-</form>
+<!-- ngserve-->
+<!-- Button trigger modal -->
+<button type="button" class="btn btn-primary float-right m-2" data-toggle="modal" data-target="#exampleModal"
+  (click)="onCreate()" data-backdrop="static" data-keyboard="false">
+  Add Locum Expenses
+</button>
+
+<div class="modal" tabindex="-1" role="dialog">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title">{{ModalTitle}}</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close" (click)="closeClick()">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <app-add-edit-locexp *ngIf="ActivateAddEditExpLoc"></app-add-edit-locexp>
+      </div>
+    </div>
+  </div>
+</div>
+
 <table style="padding-top: 1%; margin-left: 3%; margin-right: 3%; max-width: 95%;"
   class="table table-striped table-responsive-md btn-table">
-  <thead>
+  <thead class="thead-dark">
     <tr>
+      <th>Date</th>
       <th>Doctor Name</th>
       <th>Ic Number</th>
-      <th>Total Payment</th>
       <th>Remark</th>
+      <th>Total Payment</th>
       <th>Action</th>
     </tr>
   </thead>
   <tbody>
-    <tr *ngFor="let item of listdata">
-      <td><span>{{item.docname}}</span></td>
-      <td><span>{{item.icnumber}}</span></td>
-      <td><span>{{item.totalpayment}}</span></td>
-      <td><span>{{item.remark}}</span></td>
-      <td><span><button type="button" class="btn btn-primary" (click)="removeItem(item)">Reset</button></span></td>
+    <tr *ngFor="let item of locumexpenses">
+      <td><span>{{item.LocumDate}}</span></td>
+      <td><span>{{item.LocumName}}</span></td>
+      <td><span>{{item.LocumIC}}</span></td>
+      <td><span>{{item.LocumRemark}}</span></td>
+      <td><span>{{item.LocumPayment}}</span></td>
+      <td>
+        <button type="button" class="btn btn-light mr-1" data-toggle="modal" data-target="#exampleModal"
+          (click)="onCreate()">
+          Edit
+        </button>
+        <button type="button" class="btn btn-light mr-1">
+          Delete
+        </button>
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3"></td>
+      <td><span><b>Total:</b></span></td>
+      <td>{{total}}</td>
+      <td colspan="2"></td>
     </tr>
   </tbody>
 </table>
