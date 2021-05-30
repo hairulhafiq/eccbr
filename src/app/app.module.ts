@@ -13,6 +13,7 @@ import { AddEditLocexpComponent } from './locum_expenses/add-edit-locexp/add-edi
 import { SharedService } from './shared/shared.service';
 import { LoginComponent } from './login/login.component';
 import { Submit_bank_slipComponent } from './bank_in_dialog/submit_bank_slip/submit_bank_slip.component';
+import { RemarkComponent } from './Remark/Remark.component';
 
 import { MatPaginatorModule } from '@angular/material/paginator';
 import { ReactiveFormsModule, FormsModule } from '@angular/forms';
@@ -49,7 +50,8 @@ import { MatListModule } from '@angular/material/list';
     Reimbursement_requisitionComponent,
     AddEditLocexpComponent,
     LoginComponent,
-    Submit_bank_slipComponent
+    Submit_bank_slipComponent,
+    RemarkComponent
   ],
   entryComponents: [Bank_in_dialogComponent],
   imports: [

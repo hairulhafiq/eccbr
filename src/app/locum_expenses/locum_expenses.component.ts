@@ -76,7 +76,7 @@ export class Locum_expensesComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.refreshLocumExpenses();
+    // this.refreshLocumExpenses();
   }
 
 }

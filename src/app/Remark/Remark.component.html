@@ -1,0 +1,43 @@
+<h2 mat-dialog-title>Cash Difference Reason</h2>
+<p>Please enter username, password and state the reason of the cash difference</p>
+<div style="padding-right: 5%;">
+  <div *ngIf="alert" class="alert alert-warning alert-dismissible fade show" role="alert">
+    <strong>Warning!</strong> {{Usernamecheck}}
+    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+      <span aria-hidden="true">&times;</span>
+    </button>
+  </div>
+  <br>
+  <div>
+    <form style="padding-top: 4%;" fxLayoutAlign="stretch" class="login-form">
+      <mat-form-field>
+        <input [formControl]="usernameControl" matInput #username (change)="didModify(username.value)"
+          placeholder="Username" required>
+        <mat-error *ngIf="usernameControl.hasError('required')">Please enter Username</mat-error>
+      </mat-form-field>
+      <mat-form-field style="margin-left: 3%;">
+        <input [formControl]="passControl" matInput #userpassword type="password" placeholder="Password" required>
+        <mat-error *ngIf="passControl.hasError('required')">Please enter Password</mat-error>
+      </mat-form-field>
+    </form>
+    <form>
+      <mat-form-field>
+        <mat-select [formControl]="selectControl" placeholder="Clinic Name" [(value)]="selectedItem" required>
+          <mat-option *ngFor="let clinics of clinic" value={{clinics.ECBCLU_CLINICCODE}}>
+            {{clinics.CLINICNAME}}
+          </mat-option>
+        </mat-select>
+        <mat-error *ngIf="selectControl.hasError('required')">Please choose a clinic</mat-error>
+      </mat-form-field>
+    </form>
+    <form>
+      <mat-form-field [style.width.%]=90>
+        <input [formControl]="remarkControl" matInput #remark placeholder="Reason for the cash difference">
+        <mat-error *ngIf="remarkControl.hasError('required')">Please enter a Reason</mat-error>
+      </mat-form-field>
+    </form>
+    <button mat-button mat-faised-button (click)="onNoClick()">Cancel</button>
+    <button mat-button mat-raised-button
+      (click)="OnLogin(username.value,userpassword.value, selectedItem,remark.value)">Submit</button>
+  </div>
+</div>

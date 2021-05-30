@@ -5,18 +5,18 @@
         <form>
           <img style="transform: translateX(11%);" height="70%" width="70%" src='../../assets/Qualitas_logo.png'>
           <h2 style="position: center; font-weight: bold;">E-Cash Collection Book Record</h2>
-          <mat-form-field>
-            <input matInput #ClinicCode placeholder="Clinic name" value="">
+          <mat-form-field style="font-weight:bold;">
+            <input matInput placeholder="Clinic name" value="{{clinicname}}" [disabled]="true">
           </mat-form-field>
-          <mat-form-field>
-            <input matInput #username placeholder="Username" value="">
+          <mat-form-field style="font-weight:bold;">
+            <input matInput placeholder="Username" value="{{username1}}" [disabled]="true">
           </mat-form-field>
-          <mat-form-field>
+          <mat-form-field style="font-weight:bold;">
             <input matInput placeholder="Date" value="{{TodayDate | date}}" [disabled]="true">
           </mat-form-field><br>
-          <mat-form-field>
+          <mat-form-field style="font-weight:bold;">
             <mat-label>Cash In Safe</mat-label>
-            <input matInput type="initial" id="initial">
+            <input matInput type="initial" id="initial" value="RM {{MIS}}" [disabled]="true" appTwoDigitDecimaNumber>
             <button mat-icon-button matSuffix (click)="onCreate()">
               <mat-icon>info</mat-icon>
             </button>
@@ -25,13 +25,13 @@
             <mat-label>Till Money</mat-label>
             <input matInput type="id" id="tillmoney" name="tillmoney" value="RM 50" [disabled]="true">
           </mat-form-field> -->
-          <mat-form-field>
+          <mat-form-field style="font-weight:bold;">
             <mat-label>Locum Cash</mat-label>
-            <input matInput type="initial" id="initial">
+            <input matInput type="initial" id="initial" value="RM {{LFC}}" [disabled]="true" appTwoDigitDecimaNumber>
           </mat-form-field>
-          <mat-form-field>
+          <mat-form-field style="font-weight:bold;">
             <mat-label>Petty Cash</mat-label>
-            <input matInput type="id" id="id" name="id">
+            <input matInput type="id" id="id" name="id" value="RM {{CFC}}" [disabled]="true" appTwoDigitDecimaNumber>
           </mat-form-field>
         </form>
 
@@ -59,27 +59,43 @@
                   <br>
                   <mat-form-field>
                     <input matInput #openingbalance type="number" id="opening" name="opening"
-                      placeholder="Opening Balance">
+                      placeholder="Opening Sale">
                   </mat-form-field>
                   <br>
                   <mat-form-field>
-                    <input matInput #CSV type="id" id="total" name="total" placeholder="Cash Sales Visit">
+                    <input matInput #CSV type="number" id="total" name="total" min="0" step="0.01"
+                      placeholder="Sales Visit">
                   </mat-form-field>
                   <mat-form-field style="margin-left: 3%;">
-                    <input matInput #CSI type="id" id="visit" name="visit" placeholder="Cash Sales Invoiced">
+                    <input matInput #CSI type="number" id="visit" name="visit" min="0" step="0.01"
+                      placeholder="Sales Invoiced">
+                  </mat-form-field>
+                  <mat-form-field style="margin-left: 3%;">
+                    <input matInput #CSR type="number" id="visit" name="visit" min="0" step="0.01"
+                      placeholder="Sales Received">
                   </mat-form-field>
                   <br>
                   <mat-form-field>
-                    <input matInput #COH required type="number" id="received" name="received" min="0" step="0.01"
-                      placeholder="Cash On Hand">
+                    <input matInput #COH required type="number" min="0" step="0.01" placeholder="Cash On Hand"
+                      (change)="didModify(COH.value, CSV.value, openingbalance.value)">
                     <mat-hint>Please enter exclude Till Money</mat-hint>
+                  </mat-form-field>
+                  <mat-form-field style="margin-left: 3%;">
+                    <input matInput type="number" id="visit" name="visit" min="0" step="0.01" value={{cashDiff}}
+                      [disabled]="true" placeholder=" Sales Difference">
+                  </mat-form-field>
+                  <br>
+                  <mat-form-field *ngIf="Diffalert" [style.width.%]=80>
+                    <input matInput type="number" id="visit" name="visit" min="0" step="0.01" value={{DiffRemark}}
+                      [disabled]="true" placeholder=" Sales Difference">
                   </mat-form-field>
                   <br>
                   <mat-form-field style="margin-top:3%; font-weight:bold;">
-                    <input matInput type="id" #CSD id="received" name="received" placeholder="Amount Should Bank In">
+                    <input matInput type="id" id="received" name="received" placeholder="Closing Balance"
+                      [disabled]="true" value="{{closingsale}}">
                   </mat-form-field>
                   <button mat-raised-button [disabled]="buttonclicked" class="button"
-                    (click)="addTab(ClinicCode.value, openingbalance.value, CSV.value, CSI.value, CSD.value,COH.value,username.value)">
+                    (click)="addTab(cliniccode, openingbalance.value, CSV.value, CSI.value,COH.value,username1)">
                     Save
                   </button>
                 </form>

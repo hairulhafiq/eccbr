@@ -1,5 +1,11 @@
 <div fxLayoutAlign="center center" fxFlexFill class="main-div">
   <mat-card fxFlex="25">
+    <div *ngIf="alert" class="alert alert-warning alert-dismissible fade show" role="alert">
+      <strong>Warning!</strong> {{Usernamecheck}}
+      <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+        <span aria-hidden="true">&times;</span>
+      </button>
+    </div>
     <mat-toolbar color="primary">Login Page</mat-toolbar>
     <form style="padding-top: 4%;" fxLayoutAlign="stretch" fxLayout="column" class="login-form">
       <mat-form-field>

@@ -1,6 +1,6 @@
 export class Dailysales {
   ClinicCode: string;
-  ShiftId: number;
+  ShiftId: string;
   OpnMoneyInSafe: number;
   CashSales: number;
   InvCashSales: number;
