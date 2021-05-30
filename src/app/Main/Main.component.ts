@@ -2,12 +2,13 @@ import { Component, OnInit, ViewEncapsulation } from '@angular/core';
 import { DatePipe } from '@angular/common';
 import { MatDialog, MatDialogConfig } from "@angular/material/dialog";
 import { Bank_in_dialogComponent } from '../bank_in_dialog/bank_in_dialog.component';
+import { CheckingclosingbankingComponent } from '../Checkingclosingbanking/Checkingclosingbanking.component';
 // import { MatTableDataSource } from '@angular/material/table';
 import { FormControl } from '@angular/forms';
 import { SharedService } from './../shared/shared.service';
 // import { Dailysales } from './../Classes/dailysales';
 // import { LoginComponent } from './../login/login.component';
-import { Router } from '@angular/router';
+import { SharedDataService } from './../shared/sharedData.service';
 import { RemarkComponent } from '../Remark/Remark.component';
 
 @Component({
@@ -23,14 +24,14 @@ export class MainComponent implements OnInit {
   tabs = ['Shift 1'];
   selected = new FormControl(0);
   stopTab: number = 0;
-  NoOfShift: number = 1;
-  buttonclicked = false;
+  NoOfShift: any = 1;
+  buttonclicked: boolean;
   testdata: any;
   alert: boolean = false;
   cashDiff: number;
-  username1: string;
-  clinicname: string;
-  cliniccode: string;
+  username1: any;
+  clinicname: any;
+  cliniccode: any;
   closingsale: number;
   float: any;
   myDate = new Date();
@@ -52,6 +53,7 @@ export class MainComponent implements OnInit {
   ClsMoneyInSafe: number;
   CreatedBy: string;
   Diffalert: boolean = false;
+  dailysaletrue: boolean = false;
 
   onClosing() {
     this.stopTab = 1;
@@ -77,8 +79,7 @@ export class MainComponent implements OnInit {
   }
 
   addTab(CLC: any, OB: any, CSV: any, CSI: any, COH: any, USR: any) {
-    this.DiffRemark = this.service.remark;
-    console.log(this.DiffRemark);
+    this.DiffRemark = this.data.remark;
 
     var dailysales = {
       ClinicCode: CLC,
@@ -95,28 +96,29 @@ export class MainComponent implements OnInit {
       CreatedBy: USR
     };
 
-    this.testdata = this.service.postDailySales(dailysales).subscribe(res =>
-      alert("Success fully saved")
-    );
+    this.testdata = this.service.postDailySales(dailysales).subscribe(res => {
+      if (res = "1") {
+        const dialogConfig = new MatDialogConfig();
+        dialogConfig.disableClose = true;
+        dialogConfig.autoFocus = true;
+        this.dialog.open(CheckingclosingbankingComponent, dialogConfig);
+        if (this.stopTab == 1) {
+          this.buttonclicked = true;
+        }
+        else if (this.stopTab == 0) {
 
-    if (this.stopTab == 1) {
-      // ($event.target as HTMLButtonElement).disabled = true;
-      this.buttonclicked = true;
-      // this.service.postDailySales();
-    }
-    else if (this.stopTab == 0) {
+          this.NoOfShift = this.NoOfShift + 1;
+          this.tabs.push('Shift ' + this.NoOfShift);
+          this.dailysaletrue = true;
+        }
+        alert("Success fully saved")
+        this.alert = true;
 
-      this.NoOfShift = this.NoOfShift + 1;
-      this.tabs.push('Shift ' + this.NoOfShift);
-      // console.warn("Result is here", dailysales);
-      // window.location.reload();
-      this.getFloatBalance(CLC);
-    }
-    this.alert = true;
-    this.router.navigate(['/main']);
-    // this.getFloatBalance(CLC);
-
-
+      }
+      else {
+        alert("Failed To Upload Data")
+      }
+    });
   }
 
   onCreate() {
@@ -126,28 +128,34 @@ export class MainComponent implements OnInit {
     this.dialog.open(Bank_in_dialogComponent, dialogConfig);
   }
 
-  constructor(private dialog: MatDialog, private service: SharedService, private datePipe: DatePipe, private router: Router) {
+  constructor(private dialog: MatDialog, private service: SharedService, private datePipe: DatePipe, private data: SharedDataService) {
     this.myDate1 = this.datePipe.transform(this.myDate, 'yyyy-MM-dd');
   }
 
   getFloatBalance(val: any) {
+    this.buttonclicked = true;
     this.service.getFloat(this.myDate1, val).subscribe(data => {
       this.float = data;
       this.MIS = this.float.MISOpnBalance;
       this.LFC = this.float.LCFTOpnBalance;
       this.CFC = this.float.PCFTOpnBalance;
       this.NoOfShift = Number(this.float.LatestShiftID) + 1;
-      // Number(this.NoOfShift);
-      // this.NoOfShift = this.NoOfShift + 1;
+      console.log(this.NoOfShift)
+      if (this.NoOfShift != 0) {
+        for (let i in this.NoOfShift) {
+          this.tabs.push('Shift ' + this.NoOfShift[i])
+        }
+      }
     })
+    this.Diffalert = this.data.alertDiff;
+    this.buttonclicked = this.data.buttonclicked;
   }
 
   ngOnInit(): void {
-    this.username1 = this.service.username;
-    this.cliniccode = this.service.cliniccode;
-    this.clinicname = this.service.clinicname;
+    this.username1 = localStorage.getItem("UserID");
+    this.cliniccode = localStorage.getItem("clinicCode");
+    this.clinicname = localStorage.getItem("clinicName");
     this.getFloatBalance(this.cliniccode);
-    this.Diffalert = this.service.alertDiff;
   }
 
 }

@@ -1,20 +1,23 @@
-<form [formGroup]="commonexpenses">
+<form>
   <mat-form-field style="margin-left: 3%;">
     <mat-label>Type Of Expenses</mat-label>
-    <mat-select>
-      <mat-option formControlName="type" *ngFor="let expense of expense" [value]="expense.value">
-        {{expense.viewValue}}
+    <mat-select [formControl]="type" [(value)]="selectedItem" required placeholder="Type Of Expenses">
+      <mat-option *ngFor="let expenses of expense" value={{expenses.Text}}>
+        {{expenses.Text}}
       </mat-option>
+      <mat-error *ngIf="type.hasError('required')">Please choose type of expenses</mat-error>
     </mat-select>
   </mat-form-field>
   <mat-form-field style="margin-left: 3%; width: 32%">
-    <input matInput type="id" id="docname" formControlName="description" name="desc" placeholder="Description" value="">
+    <input matInput #commdesc [formControl]="description" placeholder="Description">
+    <mat-error *ngIf="description.hasError('required')">Please enter Description</mat-error>
   </mat-form-field>
   <mat-form-field style="margin-left: 3%;">
-    <input matInput type="number" id="payment" formControlName="totalpayment" name="payment" placeholder="Total Payment"
-      value="">
+    <input matInput #commpayment [formControl]="payment" type="number" name="payment" placeholder="Total Payment">
+    <mat-error *ngIf="payment.hasError('required')">Please enter payment amount</mat-error>
   </mat-form-field>
-  <button mat-raised-button style="margin-left: 5%;" (click)="addExpenses()">
+  <button mat-raised-button style="margin-left: 5%;"
+    (click)="addExpenses(selectedItem,commdesc.value,commpayment.value )">
     Submit
   </button><br>
 </form>
@@ -22,8 +25,8 @@
   class="table table-striped table-responsive-md btn-table">
   <thead style="text-align: center;">
     <tr>
-      <th style="width: 15%;">Type of Expenses</th>
-      <th style="width: 45%;">Description</th>
+      <th style="width: 25%;">Type of Expenses</th>
+      <th style="width: 35%;">Description</th>
       <th style="width: 15%;">Total Payment</th>
       <th style="width: 15%;">Action</th>
     </tr>
@@ -32,8 +35,9 @@
     <tr *ngFor="let item of listdata">
       <td><span>{{item.type}}</span></td>
       <td><span>{{item.description}}</span></td>
-      <td><span>{{item.totalpayment}}</span></td>
-      <td><span><button type="button" class="btn btn-primary" (click)="removeItem(item)">Reset</button></span></td>
+      <td><span>RM {{item.totalpayment}}</span></td>
+      <td><span><button mat-raised-button type="button" class="btn btn-primary"
+            (click)="removeItem(item)">Delete</button></span></td>
     </tr>
   </tbody>
 </table>

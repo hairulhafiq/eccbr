@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { FormGroup, FormBuilder, Validators } from '@angular/forms';
+import { FormControl, FormBuilder, Validators } from '@angular/forms';
 import { SharedService } from 'src/app/shared/shared.service';
 
 interface Expenses {
@@ -12,45 +12,28 @@ interface Expenses {
   styleUrls: ['./common_expenses.component.css']
 })
 export class Common_expensesComponent implements OnInit {
+  type = new FormControl('', Validators.required);
+  payment = new FormControl('', Validators.required);
+  description = new FormControl('', Validators.required);
 
   expense: any;
-
-  // Expenses[] = [
-  //   { value: '', viewValue: 'Common Wages' },
-  //   { value: '', viewValue: 'Fomema Delivery Cost' },
-  //   { value: '', viewValue: 'Compensation - Dr Incentive(PROCD)' },
-  //   { value: '', viewValue: 'Electricity & Water' },
-  //   { value: '', viewValue: 'Licence Fees' },
-  //   { value: '', viewValue: 'Maintenance - Clinic' },
-  //   { value: '', viewValue: 'Maintenance - Off/Off Equip' },
-  //   { value: '', viewValue: 'Maintenance - Motor Vehicle' },
-  //   { value: '', viewValue: 'Miscellaneous' },
-  //   { value: '', viewValue: 'Postage & Courier Charges' },
-  //   { value: '', viewValue: 'Printing & Stationeries' },
-  //   { value: '', viewValue: 'Staff Amenities' },
-  //   { value: '', viewValue: 'Travelling Expenses' },
-  //   { value: '', viewValue: 'Telephone' },
-  //   { value: '', viewValue: 'ECCBR-Suspense' },
-  // ];
-
-  commonexpenses: FormGroup;
-  listdata: any;
-  type: string = 'paymenttype';
+  selectedItem: string;
+  commonexpenses: any;
+  listdata: any = [];
 
   constructor(private fb: FormBuilder, private service: SharedService) {
 
-    this.listdata = [];
-    this.commonexpenses = this.fb.group({
-      type: ['', Validators.required],
-      description: ['', Validators.required],
-      totalpayment: ['', Validators.required],
-    })
+
   }
 
-  addExpenses() {
-    console.log(this.expense);
-    this.listdata.push(this.commonexpenses.value);
-    this.commonexpenses.reset();
+  addExpenses(val: any, val1: any, val2: any) {
+    this.commonexpenses = {
+      type: val,
+      description: val1,
+      totalpayment: val2
+    }
+    this.listdata.push(this.commonexpenses);
+    // this.commonexpenses.reset();
   }
 
   removeItem(element: any) {
@@ -61,8 +44,9 @@ export class Common_expensesComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.expense = this.service.getPaymentType(this.type);
-    console.log(this.expense)
+    this.service.getPaymentType("paymenttype").subscribe(data => {
+      this.expense = data;
+    });
   }
 
 }

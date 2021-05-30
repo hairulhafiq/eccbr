@@ -52,10 +52,10 @@
                   <mat-form-field>
                     <input matInput #Date placeholder="Time" value="{{TodayDate | date:'medium'}}" [disabled]="true">
                   </mat-form-field>
-                  <mat-label style="margin-left: 3%;" for=" healed">End of The Day?
+                  <!-- <mat-label style="margin-left: 3%;" for=" healed">End of The Day?
                     <mat-slide-toggle (change)="onClosing()">
                     </mat-slide-toggle>
-                  </mat-label>
+                  </mat-label> -->
                   <br>
                   <mat-form-field>
                     <input matInput #openingbalance type="number" id="opening" name="opening"
@@ -77,7 +77,7 @@
                   <br>
                   <mat-form-field>
                     <input matInput #COH required type="number" min="0" step="0.01" placeholder="Cash On Hand"
-                      (change)="didModify(COH.value, CSV.value, openingbalance.value)">
+                      (change)="didModify(COH.value, CSR.value, openingbalance.value)">
                     <mat-hint>Please enter exclude Till Money</mat-hint>
                   </mat-form-field>
                   <mat-form-field style="margin-left: 3%;">

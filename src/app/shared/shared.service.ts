@@ -3,6 +3,7 @@ import { HttpClient, HttpParams, HttpHeaders } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { Userpost } from './../Classes/userpost';
 import { Dailysales } from './../Classes/dailysales';
+import { SharedDataService } from './../shared/sharedData.service';
 
 @Injectable({
   providedIn: 'root'
@@ -20,18 +21,12 @@ export class SharedService {
     })
   };
 
-  constructor(private http: HttpClient) { }
-  username: string;
-  cliniccode: string;
-  clinicname: string;
-  remark: string;
-  buttonclicked: boolean;
-  alertDiff: boolean;
+  constructor(private http: HttpClient, private data: SharedDataService) { }
 
   getuserdetails(val: any, val1: any, val2: any) {
-    this.clinicname = val;
-    this.cliniccode = val1;
-    this.username = val2;
+    this.data.clinicname = val;
+    this.data.cliniccode = val1;
+    this.data.username = val2;
   }
 
   getUserslogin(val: any): Observable<any[]> {
@@ -50,7 +45,7 @@ export class SharedService {
 
   getPaymentType(val: any): Observable<any> {
     let params1 = new HttpParams().set('CommonID', val);
-    return this.http.get<any>(this.APIUrl1 + 'Common/GetCommonInfo', { params: params1 })
+    return this.http.get<any>(this.APIUrl3 + 'Common/GetCommonInfo', { params: params1 })
   }
 
   postDailySales(val: Dailysales) {

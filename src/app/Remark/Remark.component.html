@@ -1,5 +1,5 @@
 <h2 mat-dialog-title>Cash Difference Reason</h2>
-<p>Please enter username, password and state the reason of the cash difference</p>
+<mat-dialog-content>Please enter username, password and state the reason of the cash difference</mat-dialog-content>
 <div style="padding-right: 5%;">
   <div *ngIf="alert" class="alert alert-warning alert-dismissible fade show" role="alert">
     <strong>Warning!</strong> {{Usernamecheck}}
@@ -36,7 +36,7 @@
         <mat-error *ngIf="remarkControl.hasError('required')">Please enter a Reason</mat-error>
       </mat-form-field>
     </form>
-    <button mat-button mat-faised-button (click)="onNoClick()">Cancel</button>
+    <button mat-button mat-raised-button (click)="onNoClick()">Cancel</button>
     <button mat-button mat-raised-button
       (click)="OnLogin(username.value,userpassword.value, selectedItem,remark.value)">Submit</button>
   </div>

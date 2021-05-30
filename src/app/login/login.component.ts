@@ -1,13 +1,13 @@
 import { Component, OnInit } from '@angular/core';
 import { SharedService } from './../shared/shared.service';
+import { SharedDataService } from './../shared/sharedData.service';
 import { Userpost } from './../Classes/userpost';
 import { FormControl, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
-
 @Component({
   selector: 'app-login',
   templateUrl: './login.component.html',
-  styleUrls: ['./login.component.css']
+  styleUrls: ['./login.component.css'],
 })
 export class LoginComponent implements OnInit {
 
@@ -25,12 +25,11 @@ export class LoginComponent implements OnInit {
   selectedItem: string;
   Usernamecheck: any;
 
-  constructor(private service: SharedService, private activeRouter: ActivatedRoute, private router: Router) {
+  constructor(private service: SharedService, private shareData: SharedDataService, private router: Router) {
 
   }
 
   ngOnInit(): void {
-
   }
 
   didModify(value: any) {
@@ -68,6 +67,9 @@ export class LoginComponent implements OnInit {
 
           this.service.postloginuser(opost).subscribe(res => {
             if (res = 1) {
+              localStorage.setItem("UserID", this.username);
+              localStorage.setItem("clinicCode", this.cliniccode);
+              localStorage.setItem("clinicName", this.clinicname);
               alert("Success Login")
               this.router.navigate(['/main']);
             }

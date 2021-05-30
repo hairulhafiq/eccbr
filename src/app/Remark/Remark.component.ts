@@ -3,7 +3,7 @@ import { MatDialog, MatDialogRef, MatDialogConfig } from '@angular/material/dial
 import { SharedService } from 'src/app/shared/shared.service';
 import { FormControl, Validators } from '@angular/forms';
 import { Userpost } from '../Classes/userpost';
-import { MainComponent } from './../Main/Main.component';
+import { SharedDataService } from './../shared/sharedData.service';
 
 @Component({
   selector: 'app-Remark',
@@ -26,7 +26,7 @@ export class RemarkComponent implements OnInit {
   selectedItem: string;
   remarkcolumn: string = "";
 
-  constructor(public dialogRef: MatDialogRef<RemarkComponent>, private service: SharedService) { }
+  constructor(public dialogRef: MatDialogRef<RemarkComponent>, private service: SharedService, private data: SharedDataService) { }
 
   ngOnInit() {
   }
@@ -71,9 +71,9 @@ export class RemarkComponent implements OnInit {
           if (this.remarkcolumn != "") {
             this.service.postloginuser(opost).subscribe(res => {
               if (res = 1) {
-                this.service.buttonclicked = true;
-                this.service.remark = this.remarkcolumn;
-                this.service.alertDiff = true;
+                this.data.buttonclicked = false;
+                this.data.remark = this.remarkcolumn;
+                this.data.alertDiff = true;
                 this.dialogRef.close();
               }
               else {
