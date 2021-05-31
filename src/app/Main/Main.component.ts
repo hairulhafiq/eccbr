@@ -54,6 +54,9 @@ export class MainComponent implements OnInit {
   CreatedBy: string;
   Diffalert: boolean = false;
   dailysaletrue: boolean = false;
+  status: string;
+  col: string;
+  Usernamecheck: any;
 
   onClosing() {
     this.stopTab = 1;
@@ -112,11 +115,18 @@ export class MainComponent implements OnInit {
           this.dailysaletrue = true;
         }
         alert("Success fully saved")
+        this.col = "alert alert-success alert-dismissible fade show";
+        this.status = "Success!";
+        this.Usernamecheck = "Your data has been successfully entered."
         this.alert = true;
 
       }
       else {
         alert("Failed To Upload Data")
+        this.Usernamecheck = "Wrong Password";
+        this.col = "alert alert-warning alert-dismissible fade show";
+        this.status = "Warning!";
+        this.alert = true;
       }
     });
   }
