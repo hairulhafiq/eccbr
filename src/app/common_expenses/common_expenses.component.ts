@@ -20,19 +20,48 @@ export class Common_expensesComponent implements OnInit {
   selectedItem: string;
   commonexpenses: any;
   listdata: any = [];
-
+  alert: boolean = false;
+  success: string;
+  status: string;
+  col: string;
+  value: any;
+  total: number = 0;
   constructor(private fb: FormBuilder, private service: SharedService) {
 
 
   }
 
-  addExpenses(val: any, val1: any, val2: any) {
-    this.commonexpenses = {
-      type: val,
-      description: val1,
-      totalpayment: val2
+
+  findsum() {
+    this.value = this.commonexpenses
+    for (let j in this.value) {
+      this.total = + this.value[j].totalpayment;
+      console.log(this.total)
     }
-    this.listdata.push(this.commonexpenses);
+  }
+
+  addExpenses(val: any, val1: any, val2: any) {
+    if (val != 0 && val1 != 0 && val2 != 0) {
+      this.commonexpenses = {
+        type: val,
+        description: val1,
+        totalpayment: val2
+      }
+      this.listdata.push(this.commonexpenses);
+      this.findsum();
+      this.col = "alert alert-success alert-dismissible fade show";
+      this.status = "Success!";
+      this.success = "Your data has been successfully entered."
+      this.alert = true;
+    }
+    else {
+      this.col = "alert alert-warning alert-dismissible fade show";
+      this.status = "Warning!";
+      this.success = "Your data failed to entered. Please fill all column."
+      this.alert = true;
+    }
+
+
     // this.commonexpenses.reset();
   }
 

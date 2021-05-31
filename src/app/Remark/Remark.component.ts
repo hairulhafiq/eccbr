@@ -25,6 +25,8 @@ export class RemarkComponent implements OnInit {
   userlogin: Userpost;
   selectedItem: string;
   remarkcolumn: string = "";
+  status: string;
+  col: string;
 
   constructor(public dialogRef: MatDialogRef<RemarkComponent>, private service: SharedService, private data: SharedDataService) { }
 
@@ -55,44 +57,51 @@ export class RemarkComponent implements OnInit {
     if (this.clinic != 'Error-Could not find user id.') {
       this.username = value1;
       this.cliniccode = value2;
-      this.remarkcolumn = value3;
+
       // this.clinicarr = this.clinic;
       for (var i in this.clinic) {
         // console.log(this.clinic[i].ECBCLU_CLINICCODE)
         if (this.clinic[i].ECBCLU_CLINICCODE === value2) {
           // console.log(this.clinic[i].CLINICNAME)
           this.clinicname = this.clinic[i].CLINICNAME;
-          this.service.getuserdetails(this.clinicname, this.cliniccode, this.username);
-          var opost = new Userpost;
-          opost.UserId = value1;
-          opost.Password = value;
-          opost.ClinicCode = value2;
+          var opost = {
+            UserId: value1,
+            Password: value,
+            ClinicCode: value2
+          };
 
-          if (this.remarkcolumn != "") {
-            this.service.postloginuser(opost).subscribe(res => {
-              if (res = 1) {
-                this.data.buttonclicked = false;
-                this.data.remark = this.remarkcolumn;
-                this.data.alertDiff = true;
-                this.dialogRef.close();
-              }
-              else {
-                this.Usernamecheck = "Wrong Password";
-                this.alert = true;
-              }
-            });
-          }
-          else {
-            this.Usernamecheck = "Please Enter Remark of cash difference";
-            this.alert = true;
-          }
+          this.service.postloginuser(opost).subscribe(res => {
+            if (res = "1") {
+              this.data.buttonclicked = false;
+              this.data.remark = this.remarkcolumn;
+              this.data.alertDiff = true;
+              this.dialogRef.close();
+              this.col = "alert alert-success alert-dismissible fade show";
+              this.status = "Success!";
+              this.Usernamecheck = "Your data has been successfully entered."
+            }
+            else {
+              this.Usernamecheck = "Wrong Password";
+              this.col = "alert alert-warning alert-dismissible fade show";
+              this.status = "Warning!";
+              this.alert = true;
+            }
+          });
+        }
+
+        else {
+          this.Usernamecheck = "Please Enter Remark of cash difference";
+          this.col = "alert alert-warning alert-dismissible fade show";
+          this.status = "Warning!";
+          this.alert = true;
         }
       }
     }
     else {
       this.Usernamecheck = "Wrong Username";
+      this.col = "alert alert-warning alert-dismissible fade show";
+      this.status = "Warning!";
       this.alert = true;
     }
   }
-
 }

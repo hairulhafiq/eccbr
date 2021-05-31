@@ -21,13 +21,7 @@ export class SharedService {
     })
   };
 
-  constructor(private http: HttpClient, private data: SharedDataService) { }
-
-  getuserdetails(val: any, val1: any, val2: any) {
-    this.data.clinicname = val;
-    this.data.cliniccode = val1;
-    this.data.username = val2;
-  }
+  constructor(private http: HttpClient) { }
 
   getUserslogin(val: any): Observable<any[]> {
     let params1 = new HttpParams().set('UserId', val);
@@ -46,6 +40,11 @@ export class SharedService {
   getPaymentType(val: any): Observable<any> {
     let params1 = new HttpParams().set('CommonID', val);
     return this.http.get<any>(this.APIUrl3 + 'Common/GetCommonInfo', { params: params1 })
+  }
+
+  gettotalcashsales(val: any): Observable<any> {
+    let params1 = new HttpParams().set('ClinicCode', val);
+    return this.http.get<any>(this.APIUrl3 + 'DailySales/GetNewDailySalesForBankIn', { params: params1 })
   }
 
   postDailySales(val: Dailysales) {

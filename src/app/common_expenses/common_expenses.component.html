@@ -1,3 +1,9 @@
+<div *ngIf="alert" class={{col}} role="alert">
+  <strong>{{status}}</strong> {{success}}
+  <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+    <span aria-hidden="true">&times;</span>
+  </button>
+</div>
 <form>
   <mat-form-field style="margin-left: 3%;">
     <mat-label>Type Of Expenses</mat-label>
@@ -38,6 +44,12 @@
       <td><span>RM {{item.totalpayment}}</span></td>
       <td><span><button mat-raised-button type="button" class="btn btn-primary"
             (click)="removeItem(item)">Delete</button></span></td>
+    </tr>
+    <tr>
+      <td></td>
+      <td style="align-content: right;"><span><b>Total:</b></span></td>
+      <td>RM {{total}}</td>
+      <td colspan="1"></td>
     </tr>
   </tbody>
 </table>

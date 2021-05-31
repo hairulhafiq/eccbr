@@ -59,14 +59,14 @@ export class LoginComponent implements OnInit {
         if (this.clinic[i].ECBCLU_CLINICCODE === value2) {
           // console.log(this.clinic[i].CLINICNAME)
           this.clinicname = this.clinic[i].CLINICNAME;
-          this.service.getuserdetails(this.clinicname, this.cliniccode, this.username);
-          var opost = new Userpost;
-          opost.UserId = value1;
-          opost.Password = value;
-          opost.ClinicCode = value2;
+          var opost = {
+            UserId: value1,
+            Password: value,
+            ClinicCode: value2
+          };
 
           this.service.postloginuser(opost).subscribe(res => {
-            if (res = 1) {
+            if (res = "1") {
               localStorage.setItem("UserID", this.username);
               localStorage.setItem("clinicCode", this.cliniccode);
               localStorage.setItem("clinicName", this.clinicname);

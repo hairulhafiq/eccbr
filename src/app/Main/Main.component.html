@@ -39,8 +39,8 @@
       <div class="section-right" style="border-left-style: dotted;">
         <mat-tab-group style="margin-left: 2%; margin-right: 3%;" #matgroup>
           <mat-tab label="DAILY SALES">
-            <div *ngIf="alert" class="alert alert-success alert-dismissible fade show" role="alert">
-              <strong>Success!</strong> Your data has been entered successfully.
+            <div *ngIf="alert" class={{col}} role="alert">
+              <strong>{{status}}</strong> {{success}}
               <button type="button" class="close" data-dismiss="alert" aria-label="Close">
                 <span aria-hidden="true">&times;</span>
               </button>
