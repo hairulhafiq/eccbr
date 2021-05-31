@@ -71,7 +71,7 @@ export class RemarkComponent implements OnInit {
           };
 
           this.service.postloginuser(opost).subscribe(res => {
-            if (res = "1") {
+            if (res == "1") {
               this.data.buttonclicked = false;
               this.data.remark = this.remarkcolumn;
               this.data.alertDiff = true;
